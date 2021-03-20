@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'桥接模式原理类图'/
+/'手机品牌'/
+interface Brand{
+    void call();
+}
+/'vivo'/
+class BrandImplVivo{
+
+}
+/'小米'/
+class BrandImplXm{
+
+}
+/'手机抽象类'/
+abstract class Phone{
+    /'聚合进去'/
+    private Brand brand;
+}
+
+/'折叠手机'/
+class ZdPhone{
+
+}
+/'旋转手机'/
+class XzPhone{
+
+}
+
+Phone o-- Brand
+Phone <|-- ZdPhone
+Phone <|-- XzPhone
+Brand <|.. BrandImplVivo
+Brand <|.. BrandImplXm
+@enduml

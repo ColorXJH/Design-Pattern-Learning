@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+/'源对象-被代理的对象'/
+class TeacherDao{
+    void teach();
+}
+/'拦截器接口'/
+interface MethodInterceptor{}
+/'代理'/
+class ITeacherDaoProxy{
+    /'代理对象'/
+    private Object target;
+    /'构造器'/
+    public ITeacherDaoProxy(){};
+    /'返回代理对象'/
+    Object getProxyInstance(){};
+    /'重写拦截方法，实现对目标对象的方法调用'/
+    intercept();
+}
+/'实现'/
+MethodInterceptor <|.. ITeacherDaoProxy
+/'客户端'/
+class Client{}
+
+
+ITeacherDaoProxy o-- TeacherDao
+Client --> ITeacherDaoProxy
+Client --> TeacherDao
+@enduml

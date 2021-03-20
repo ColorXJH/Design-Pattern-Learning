@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'抽象工厂'/
+interface AbsFactroy{
+    /'抽象工厂方法'/
+    Pizza createPizza();
+}
+/'具体工厂'/
+class BJFactory{
+}
+class LDFactory{
+}
+/'实现'/
+AbsFactroy <|.. BJFactory
+AbsFactroy <|.. LDFactory
+
+class OrderPizza{
+}
+/'聚合'/
+OrderPizza o-- AbsFactroy
+/'依赖'/
+AbsFactroy ..> Pizza
+/'-- 表示关联  --> 表示单向关联 表明哪个对象作用到哪个对象上'/
+
+class Pizza{
+    protected String name;
+    void prepare();
+    void bake();
+    void cut();
+    void box();
+}
+
+class BJCheesePizza{}
+class BJGreekPizza{}
+class LDCheesePizza{}
+class LDGreekPizza{}
+
+/'继承'/
+Pizza <|-- BJCheesePizza
+Pizza <|-- BJGreekPizza
+Pizza <|-- LDCheesePizza
+Pizza <|-- LDGreekPizza
+
+/'依赖'/
+BJFactory ..> BJCheesePizza
+BJFactory ..> BJGreekPizza
+LDFactory ..> LDCheesePizza
+LDFactory ..> LDGreekPizza
+@enduml

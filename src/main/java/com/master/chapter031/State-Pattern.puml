@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'状态类'/
+interface State{
+    /'扣减积分'/
+    void deduceMoney();
+    /'抽奖'/
+    boolean  raffle();
+    /'领奖'/
+    dispensePrice();
+}
+/'具体的状态'/
+
+/'不能抽奖状态'/
+class NoRaffleState{
+}
+
+/'可以抽奖'/
+class CanRaffleState{
+}
+
+/'发放奖品'/
+class DispensePriceState{
+
+}
+
+/'奖品发完了'/
+class DispensePriceOutState{
+
+}
+
+/'活动：上下文对象'/
+/''/
+class Activity{
+    State state;
+}
+
+/'客户端'/
+class Client{
+}
+
+
+State <|.. NoRaffleState
+State <|.. CanRaffleState
+State <|.. DispensePriceState
+State <|.. DispensePriceOutState
+/'Activity类：含有所有的状态对象，各个状态子类也含有activity对象
+    你中有我，我中有你  ：关联关系
+'/
+Activity -- NoRaffleState
+Activity -- CanRaffleState
+Activity -- DispensePriceState
+Activity -- DispensePriceOutState
+
+
+/'客户端依赖的对象'/
+Client ..> Activity
+Client ..> State
+
+@enduml

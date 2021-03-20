@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+/'观察者模式实现'/
+
+/'气象站接口'/
+interface Subject{
+    void registerObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers();
+}
+
+/'核心类'/
+/'1：天气信息'/
+/'2：管理观察者'/
+class WeatherDate{
+    List<Observer>list;
+}
+
+
+Subject<|..WeatherDate
+
+interface Observer{
+    void update();
+}
+
+Subject ..>Observer
+WeatherDate o--Observer
+
+
+/'具体观察者'/
+class CurrentCondition{
+}
+class Baidu{
+}
+class Xinlang{
+}
+
+Observer<|..CurrentCondition
+Observer<|..Baidu
+Observer<|..Xinlang
+
+class client{
+}
+
+
+client..>Observer
+client..>Subject
+
+@enduml

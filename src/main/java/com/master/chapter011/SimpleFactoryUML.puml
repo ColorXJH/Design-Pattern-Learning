@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'传统方法'/
+/'pizza抽象类'/
+class Pizza{
+    prepare();
+    bake();
+    cut();
+    box();
+}
+/'pizza具体实现类'/
+class CheesePizza{
+
+}
+/'pizza具体实现类'/
+class GreekPizza{
+
+}
+/'订购pizza'/
+class OrderPizza{
+
+}
+/'订购pizza1'/
+class OrderPizza1{
+
+}
+/'订购pizza2'/
+class OrderPizza2{
+
+}
+/'pizza店'/
+class PizzaStore{
+}
+
+
+/'泛化-继承-扩展'/
+Pizza <|-- CheesePizza
+Pizza <|-- GreekPizza
+
+/'依赖'/
+PizzaStore ..> OrderPizza
+
+/'pizza工厂类'/
+class SimplePiazzaFactory{
+}
+/'依赖'/
+
+SimplePiazzaFactory ..>Pizza
+/'聚合'/
+OrderPizza o-- SimplePiazzaFactory
+OrderPizza1 o-- SimplePiazzaFactory
+OrderPizza2 o-- SimplePiazzaFactory
+
+@enduml

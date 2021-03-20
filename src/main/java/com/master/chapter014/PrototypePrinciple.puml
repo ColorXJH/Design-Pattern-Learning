@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+/'原型类'/
+abstract class Prototype{
+/'声明一个克隆自己的方法'/
+void clone();
+}
+/'具体的原型类'/
+class MyPrototype1{
+void clone();
+}
+class MyPrototype2{
+void clone();
+}
+Prototype<|--MyPrototype1
+Prototype<|--MyPrototype2
+/'客户端依赖原型'/
+/'让一个原型对象克隆自己，从而创建出一个新的对象（属性一样）'/
+class client{
+}
+client ..> Prototype
+
+@enduml

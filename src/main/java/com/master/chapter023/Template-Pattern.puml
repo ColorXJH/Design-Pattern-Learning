@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+interface ConfigurableApplicationContext{
+     void refresh();
+}
+abstract class AbstractApplicationContext{
+     void refresh(){};
+}
+
+abstract class AbstractRefreshableApplicationContext{
+}
+
+abstract class AbstractRefreshableConfigApplicationContext{
+}
+abstract class AbstractXmlApplicationContext{
+}
+
+class ClassPathXmlApplicationContext{
+}
+
+ConfigurableApplicationContext <|.. AbstractApplicationContext
+AbstractApplicationContext <|-- AbstractRefreshableApplicationContext
+AbstractRefreshableApplicationContext <|-- AbstractRefreshableConfigApplicationContext
+AbstractRefreshableConfigApplicationContext <|-- AbstractXmlApplicationContext
+AbstractXmlApplicationContext <|-- ClassPathXmlApplicationContext
+@enduml

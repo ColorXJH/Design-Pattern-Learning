@@ -1,0 +1,102 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+/'依赖'/
+class PersonServiceBean{
+        PersonDao personDao
+        save(Person person)
+        getIdCard(Integer personId)
+        modified(Department department)
+
+}
+
+class PersonDao{}
+class IDCard{}
+class Person{}
+class Department{}
+/'以下两个都可以'/
+PersonServiceBean o-- PersonDao /'聚合'/
+PersonServiceBean  ..>   PersonDao /'依赖'/
+PersonServiceBean  ..>   IDCard
+PersonServiceBean  ..>   Person
+PersonServiceBean  ..>   Department
+
+
+/'泛化 继承 扩展 extension'/
+
+abstract class DaoSupport{
+    void save(Object o){}
+    void delete(Object o){}
+}
+class MyDaoSupport{}
+DaoSupport <|-- MyDaoSupport
+/'或者如下编写MyDaoSupport类'/
+/'class MyDaoSupport extends DaoSupport{
+
+}'/
+
+/'实现'/
+interface PersonService{
+void delete();
+}
+class PersonServiceImpl{
+void delete(){};
+}
+PersonService  <|.. PersonServiceImpl
+/'也可以使用如下关键字完成实现'/
+/'class PersonServiceImpl implements PersonService{
+ void delete(){}
+}'/
+
+/'关联关系'/
+/'双向1对1'/
+class Persons{
+    IDCards card;
+}
+class IDCards{
+    Persons person1;
+}
+Persons "1"  .. "1"  IDCards
+
+/'聚合关系'/
+/'是特殊的关联关系，具有关联关系的导航性和多重性'/
+/'整体和部分是可分开的，不能分开则为组合关系'/
+class Computer{
+    private Mouse mouse;
+    private KeyBoard KeyBoard;
+    public void setMouse(Mouse mouse){
+            this.mouse=mouse;
+    };
+    public void setKeyBoard(KeyBoard keyBoard){
+            this.keyBoard=keyBoard;
+    };
+}
+
+class Mouse{
+    private String name;
+}
+class KeyBoard{
+    private String name;
+}
+
+Computer o-- Mouse
+Computer o-- KeyBoard
+
+/'组合关系'/
+/'当聚合关系的整体和部分不可分离时，则升级为组合关系'/
+class ComputerOther{
+    private Mouse11 mouse=new Mouse11();
+    private KeyBoard11 keyboard=new KeyBoard11();
+}
+class Mouse11{
+    private String name;
+}
+class KeyBoard11{
+    private String name;
+}
+
+ComputerOther *--  Mouse11
+ComputerOther *--  KeyBoard11
+
+@enduml

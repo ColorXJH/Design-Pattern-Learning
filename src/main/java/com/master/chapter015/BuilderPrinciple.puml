@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'建造者模式'/
+/'定义了产品创建流程和返回方法'/
+interface Builder{
+    buildPartA();
+    buildPartB();
+    buildPartC();
+    getResult();
+}
+/'产品'/
+class Product{}
+/'指挥者，去调用建造者接口，该接口可以创建不同的产品'/
+class Director{
+    private Builder builder;
+    construct();
+}
+/'具体建造者，实现流程和方法'/
+class ConcreteBuilder{
+    buildPartA();
+    buildPartB();
+    buildPartC();
+    getResult();
+}
+/'实现 '/
+Builder <|..ConcreteBuilder
+/'组合'/
+Builder *.. Product
+/'聚合'/
+Director o-- Builder
+/'客户端'/
+class Client{}
+Client ..> Director
+Client ..> Builder
+@enduml

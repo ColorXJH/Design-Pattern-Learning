@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'解释器'/
+class Expression{
+    void interpret();
+}
+/'变量解释器--（终结符解释器）'/
+class VarExpression{
+    void interpret();
+}
+/'符号解释器--（非终结符解释器）'/
+class SymbolExpression{
+    void interpret();
+}
+/'继承'/
+Expression<|--VarExpression
+Expression<|--SymbolExpression
+/'聚合：'/
+SymbolExpression o-- Expression
+
+/'减法解释器'/
+class SubExpression{
+}
+/'加法解释器'/
+class AddExpression{
+
+}
+/'继承符号解释器'/
+SymbolExpression <|--SubExpression
+SymbolExpression <|--AddExpression
+
+
+/'计算器类'/
+class Caculator{
+}
+Caculator o-- Expression
+
+/'客户端'/
+class Client{
+}
+
+/'依赖（使用）'/
+Client ..> Caculator
+
+
+/'会使用到栈，stack
+    1:设计模式
+    2：程序本身的逻辑
+'/
+
+@enduml

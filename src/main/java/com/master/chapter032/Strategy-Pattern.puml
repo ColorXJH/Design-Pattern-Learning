@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'飞行策略接口'/
+interface FlyBehavior{
+    void fly();
+}
+/'叫声策略接口'/
+interface QuackBehavior{
+    void quack();
+}
+
+/'具体的不同策略'/
+class NoFlyBehavior{
+
+}
+
+class GoodFlyBehavoir{
+
+}
+
+class BadFlyBehavior{
+
+}
+
+class GegeQuackBehavior{
+}
+class GagaQuackBehavior{
+}
+class NoQuackBehavior{
+}
+
+
+FlyBehavior <|.. NoFlyBehavior
+FlyBehavior <|.. GoodFlyBehavoir
+FlyBehavior <|.. BadFlyBehavior
+
+
+QuackBehavior <|.. GegeQuackBehavior
+QuackBehavior <|.. GagaQuackBehavior
+QuackBehavior <|.. NoQuackBehavior
+/''/
+class Duck{
+    FlyBehavior flyBehavior;
+    QuackBehavior quackBehavior;
+}
+
+class PekingDuck{
+}
+class WildDuck{
+}
+class ToyDuck{
+}
+
+/'继承'/
+Duck <|-- PekingDuck
+Duck <|-- WildDuck
+Duck <|-- ToyDuck
+
+/'聚合'/
+Duck o-- FlyBehavior
+Duck o-- QuackBehavior
+
+
+
+@enduml

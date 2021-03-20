@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Pizza{
+    protected String name;
+    void prepare();
+    void bake();
+    void cut();
+    void box();
+}
+
+class BJCheesePizza{}
+class BJGreekPizza{}
+class LDCheesePizza{}
+class LDGreekPizza{}
+
+/'继承'/
+Pizza <|-- BJCheesePizza
+Pizza <|-- BJGreekPizza
+Pizza <|-- LDCheesePizza
+Pizza <|-- LDGreekPizza
+
+/'工厂方法'/
+class OrderPizza{
+    Pizza abstract createPizza();
+}
+/'北京/伦敦订购披萨类，继承工厂方法类'/
+class BJOrderPizza{
+}
+class LDOrderPizza{
+}
+OrderPizza <|--  BJOrderPizza
+OrderPizza <|--  LDOrderPizza
+
+/'北京订购类只依赖北京区域的披萨'/
+BJOrderPizza -->BJCheesePizza
+BJOrderPizza -->BJGreekPizza
+LDOrderPizza -->LDCheesePizza
+LDOrderPizza -->LDGreekPizza
+
+OrderPizza-->Pizza
+@enduml

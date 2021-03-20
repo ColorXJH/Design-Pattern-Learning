@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Memento{
+    int attact;
+    int def;
+}
+
+class CareTaker{
+    Memento memento;
+}
+/'备忘录类聚合到守护者中'/
+CareTaker o--Memento
+
+
+/'游戏角色'/
+class GameRole{
+    Memento createMemento();
+
+}
+GameRole o--Memento
+
+class Client{
+}
+Client..>GameRole
+Client..>Memento
+@enduml

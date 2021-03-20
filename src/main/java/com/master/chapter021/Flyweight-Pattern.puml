@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'创建享元模式工厂'/
+class FlyweightFactory{
+    /'根据用户需求返回享元对象'/
+    /'内部存在一个共享池'/
+    Flyweight getFlyweight(key key);
+}
+/'享元接口'/
+abstract class  Flyweight{
+    abstract void operation();
+}
+/'聚合'/
+FlyweightFactory o-- Flyweight
+/'客户端'/
+class Client{}
+/'具体享元'/
+class ConcurrentFlyweight{}
+class UnsharedFlyweight{}
+
+/'继承/扩展/泛化'/
+Flyweight <|-- ConcurrentFlyweight
+Flyweight <|-- UnsharedFlyweight
+
+/'依赖'/
+Client --> FlyweightFactory
+Client --> ConcurrentFlyweight
+Client --> UnsharedFlyweight
+@enduml

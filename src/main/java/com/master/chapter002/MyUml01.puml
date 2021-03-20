@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+class A
+class B
+class C
+class D
+interface interface1{
+    operation2();
+    operation3();
+
+}
+interface interface2{
+    operation3();
+    operation4();
+}
+interface interface3{
+    operation1();
+}
+/'B D 实现接口interface1, A通过接口interface1依赖B, C通过接口interface1依赖D'/
+
+/'<|-- 实现'/
+interface1 <|-- B
+interface2 <|-- D
+interface3 <|-- B
+interface3 <|-- D
+
+/'<|.. 依赖（使用）'/
+interface1 <|.. A
+interface2 <|.. C
+interface3 <|.. A
+interface3 <|.. C
+
+
+
+
+
+@enduml

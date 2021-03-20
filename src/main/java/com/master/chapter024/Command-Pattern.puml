@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'命令接口'/
+interface Command{
+    /'执行命令'/
+    void execute();
+    /'撤销'/
+    void undo();
+}
+
+/'电灯打开命令'/
+class LightOnCommand{
+      void execute();
+      void undo();
+}
+
+/'电灯关闭命令'/
+class LightOffCommand{
+      void execute();
+      void undo();
+}
+
+/'电灯接收者'/
+class LightReceiver{
+    /'真正执行的动作--打开/关闭'/
+    void on();
+    void off();
+}
+/'遥控器调用者'/
+class ControllerInvoker{
+     /'一组打开和关闭的命令'/
+     Command[] onCommand;
+     Command[] offCommand;
+}
+/'空命令:不执行任何操作（省略了判断为空，简化操作）'/
+class NoCommand{
+}
+Command <|.. NoCommand
+/'客户端'/
+class Client{
+}
+
+Command <|.. LightOnCommand
+Command <|.. LightOffCommand
+LightOnCommand o-- LightReceiver
+LightOffCommand o-- LightReceiver
+ControllerInvoker o-- Command
+Client --> ControllerInvoker
+Client --> Command
+Client --> LightReceiver
+
+
+@enduml

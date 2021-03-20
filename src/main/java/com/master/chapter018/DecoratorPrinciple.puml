@@ -1,0 +1,86 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+/'装饰者设计模式解决星巴克咖啡订单'/
+
+/'抽象饮料层 --component'/
+abstract class Drink{
+    private String description;
+    void getDescription();
+    void cost();
+}
+
+
+/'咖啡缓冲层（因为具体的单品咖啡比较多）'/
+abstract class Coffee{
+    /'将单品咖啡的共同点都抽象到缓冲层'/
+}
+
+/'继承'/
+Drink <|-- Coffee
+
+/'各种不同种类的单品咖啡'/
+class ShortBlack{
+    void cost();
+}
+class Decaf{
+    void cost();
+}
+
+class Espresso{
+    void cost();
+}
+class LongBlack{
+    void cost();
+}
+
+/'实现'/
+Coffee <|.. ShortBlack
+Coffee <|.. Decaf
+Coffee <|.. Espresso
+Coffee <|.. LongBlack
+
+/'以上三个部分组成了被修饰者'/
+
+
+/'装饰类(包含一个被装饰对象component)'/
+class Decorator{
+    private Drink drink;
+    void getDescription();
+    /'费用叠加计算--递归'/
+    void cost();
+}
+/'组合'/
+Decorator *.. Drink
+/'可以不需要继承'/
+Drink <|-- Decorator
+
+
+
+/'具体装饰类(各种调料)'/
+class Chocolate{
+    void getDescription();
+    void cost();
+}
+
+class Milk{
+    void getDescription();
+    void cost();
+}
+
+class Soy{
+    void getDescription();
+    void cost();
+}
+
+/'实现'/
+Decorator <|.. Chocolate
+Decorator <|.. Milk
+Decorator <|.. Soy
+
+
+/'好处在于：如果想增加一个新的单品咖啡，只需要继承coffee
+调料不需要发生任何变化
+'/
+
+@enduml

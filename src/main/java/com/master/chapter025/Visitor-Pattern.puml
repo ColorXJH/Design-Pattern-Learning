@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Visitor{
+    void op1(Element element);
+
+}
+
+/'成功/失败的类型'/
+class ConcreteVisitor{
+     void op1();
+     void op2();
+}
+
+
+abstract class Element{
+   /'为了使用不同的visitor,通过依赖visitor实现对其访问'/
+   void accept(Visitor visitor)
+}
+/'不同的观众类型，男的/女的/小孩'/
+class ConcreteElement{
+    void accept(Visitor visitor)
+}
+
+/'数据结构'/
+class ObjectStructure{
+    /'有很多具体element的实例'/
+}
+
+class client{
+}
+
+Visitor <|-- ConcreteVisitor
+Element -- Visitor
+/'将成功/失败类型穿给你，不同的人打不同的分数'/
+Element <|-- ConcreteElement
+ObjectStructure o-- Element
+
+client-->Visitor
+client -->ObjectStructure
+@enduml

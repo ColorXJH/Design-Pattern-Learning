@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class client{
+}
+
+interface List{
+    Iterator iterator();
+}
+
+class ArrayList{
+    Object[] element;
+    Iterator iterator();
+}
+class Object{
+}
+interface Iterator{
+    boolean hasNext();
+    E next();
+    void remove();
+}
+/'ArrayList的内部类'/
+class Itr{
+}
+
+List<|..ArrayList
+ArrayList o-- Object
+Iterator <|..Itr
+/'因为是内部类，可以直接使用Object数组，这和标准的聚合关系有一丝出入'/
+Itr -->Object
+ArrayList o-- Itr
+client -->List
+client -->Iterator
+
+@enduml

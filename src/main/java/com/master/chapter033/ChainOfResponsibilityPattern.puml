@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+/'请求的接收者（处理者）'/
+abstract class Handler{
+    Handler handler;
+    void processRequest(Request request);
+}
+
+class ConcreteHandlerA{
+}
+class ConcreteHandlerB{
+}
+
+Handler <|-- ConcreteHandlerA
+Handler <|-- ConcreteHandlerB
+Handler o-- Handler
+
+
+/'请求'/
+
+class Request{
+}
+/'Handler会使用（依赖）到请求'/
+Handler ..> Request
+
+class Client{
+
+}
+/'Client创建一个request,然后放入handler处理'/
+Client ..> Request
+Client ..> Handler
+@enduml

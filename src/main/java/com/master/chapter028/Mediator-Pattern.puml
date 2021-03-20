@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'中介者抽象类'/
+abstract class Mediator{
+}
+/'具体子类'/
+class ConcreteMediator{
+    /'维护同事集合'/
+    private Colleage hashmap
+    void getMessage();
+}
+
+Mediator<|--ConcreteMediator
+/'同事抽象类'/
+class Colleage{
+    void sendMessage();
+    Mediator getMediator();
+}
+
+
+class ConcreteColleage{
+       public ConcreteColleage(){
+            /'构造器中拿到Mediator，并将自己放入到其中的hashmap中去'/
+       };
+}
+Colleage<|--ConcreteColleage
+
+/'关联关系'/
+/'你中有我我中有你'/
+Mediator--Colleage
+/'具体中介者会去聚合同事类接口'/
+ConcreteMediator o-- Colleage
+ConcreteColleage ..>Mediator
+
+
+@enduml

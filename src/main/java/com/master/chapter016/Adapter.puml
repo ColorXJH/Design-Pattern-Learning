@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+/'动手写一个springmvc通过适配器设计模式获取到对应Controller的源码'/
+interface Controller{
+}
+class HttpController{}
+class SimpleController{}
+class AnnotationController{}
+
+Controller <|.. HttpController
+Controller <|.. SimpleController
+Controller <|.. AnnotationController
+
+interface HandlerAdapter{
+    boolean support(Object handler);
+    void handle(Object handler);
+}
+
+class SimpleHandlerAdapter{}
+class HttpHandlerAdapter{}
+class AnnotationHandlerAdapter{}
+
+HandlerAdapter <|.. SimpleHandlerAdapter
+HandlerAdapter <|.. HttpHandlerAdapter
+HandlerAdapter <|.. AnnotationHandlerAdapter
+
+class DispatcherServlet{
+        public static List<HandlerAdapter>adapters;
+        void doDispatch();
+}
+
+DispatcherServlet o-- HandlerAdapter
+
+
+
+@enduml

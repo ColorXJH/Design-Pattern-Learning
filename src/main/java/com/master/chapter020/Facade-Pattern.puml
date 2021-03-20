@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+/'外观类'/
+class Facade{
+}
+
+
+/'子系统1'/
+class sub1{
+}
+
+/'子系统2'/
+class sub2{
+}
+
+/'子系统3'/
+class sub3{
+}
+
+/'聚合'/
+Facade o-- sub1
+Facade o-- sub2
+Facade o-- sub3
+
+/'客户端'/
+class client{
+}
+
+/'依赖/使用'/
+client ..> Facade
+@enduml
